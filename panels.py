@@ -82,7 +82,7 @@ def _connect_section() -> ui.UINode:
                 ]),
                 ui.Stack(direction="v", gap=1, align="stretch", children=[
                     ui.Text("Environment", variant="caption"),
-                    ui.Select(param_name="environment", default="sandbox", options=[
+                    ui.Select(param_name="environment", value="sandbox", options=[
                         {"label": "Sandbox (testing)", "value": "sandbox"},
                         {"label": "Production (live evaluations)", "value": "production"},
                     ]),
