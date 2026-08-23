@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Alloy">
+  <defs>
+    <linearGradient id="a" x1="16" y1="12" x2="112" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6D5DFB"/>
+      <stop offset="1" stop-color="#2F80ED"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#a)"/>
+  <path d="M64 21 101 42v44L64 107 27 86V42l37-21Z" fill="#fff" fill-opacity=".16"/>
+  <path d="m64 31 27 15v32L64 94 37 78V46l27-15Zm0 10L46 51v22l18 10 18-10V51L64 41Z" fill="#fff"/>
+  <path d="M58 53h12v18H58zM53 62h22v9H53z" fill="#fff"/>
+</svg>
