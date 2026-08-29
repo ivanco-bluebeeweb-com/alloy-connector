@@ -118,6 +118,9 @@ async def alloy_connect_panel(ctx, **kwargs) -> object:
         ui.Text("Connected accounts", variant="subtitle"),
         _connections_section(connections),
         ui.Divider(),
+        ui.Button("View account audit", variant="primary", size="sm", full_width=True,
+                  icon="ShieldCheck", on_click=ui.Call("__panel__alloy_center")),
+        ui.Divider(),
         _connect_section(),
         ui.Divider(),
         _settings_button(),
@@ -168,7 +171,33 @@ async def alloy_center_panel(ctx, **kwargs) -> object:
     slot="center" panel is registered but the Panel app never fetches it
     at session-init without that flag. Text is the shared canonical
     wording -- must stay identical across every app in this situation."""
-    return ui.Empty(
-        message="Nothing to show here -- this app is managed entirely from the sidebar.",
-        icon="👈",
-    )
+    connections = await h._load_connections(ctx)
+    if not connections:
+        return ui.Empty(message="Connect an Alloy account from the sidebar to see it here.", icon="🛡️")
+
+    from schemas import AuditAlloyAccountParams
+    conn_id = connections[0].get("id", "")
+    result = await h.audit_alloy_account(ctx, AuditAlloyAccountParams(connection_id=conn_id))
+    body: list[ui.UINode] = [ui.Text("Account audit", variant="subtitle")]
+    if result.success and result.data:
+        r = result.data
+        body.append(ui.Stats(children=[
+            ui.Stat(label="Open cases", value=str(r.open_cases_count)),
+            ui.Stat(label="Open investigations", value=str(r.open_investigations_count)),
+            ui.Stat(label="Pending reviews", value=str(r.pending_reviews_count)),
+        ]))
+        body.append(ui.KeyValue(columns=2, items=[
+            {"key": "Denied (sampled)", "value": str(r.denied_applications_sampled)},
+            {"key": "Manual review (sampled)", "value": str(r.manual_review_applications_sampled)},
+        ]))
+        for f in r.findings[:15]:
+            color = {"high": "red", "medium": "yellow"}.get(f.severity, "gray")
+            body.append(ui.Stack(direction="h", gap=2, align="center", children=[
+                ui.Badge(label=(f.severity or "info").upper(), color=color),
+                ui.Text(f.category, variant="body"),
+                ui.Text(f.detail, variant="caption"),
+            ]))
+    else:
+        body.append(ui.Text("Could not load the account audit.", variant="caption"))
+
+    return ui.Stack(direction="v", gap=3, align="stretch", children=body)
