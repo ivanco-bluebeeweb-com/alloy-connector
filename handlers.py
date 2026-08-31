@@ -6,7 +6,7 @@ Groups, Webhooks, Parameters, and value-add reports (Tier 3). Built on
 alloy_client.py / schemas.py, following the same shape as Cin7 Core
 Connector's / MuleSoft Connector's handlers.py.
 
-WHY ActionResult.success(data, summary), NEVER ActionResult.ok(...).
+WHY ActionResult.success(data, summary), NEVER ActionResult.success(...).
 
 imperal_sdk's real ActionResult class exposes .success(data, summary, *,
 ui=None, refresh_panels=None) and .error(error, retryable=False, *,
