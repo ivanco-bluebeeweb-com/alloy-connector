@@ -38,6 +38,8 @@ class ProviderConnection(sdl.Entity):
 
 
 class ConnectionList(sdl.Entity):
+    id: str = ""
+    title: str = ""
     connections: list[ProviderConnection] = Field(default_factory=list)
 
 
@@ -567,6 +569,7 @@ class GetPendingReviewQueueParams(BaseModel):
 
 
 class DeleteResult(sdl.Entity):
+    title: str = ""
     deleted: bool = False
     id: str = ""
 
@@ -579,12 +582,14 @@ class GenericRecord(sdl.Entity):
     `data` avoids re-declaring every field twice while still giving
     chat/panel code a stable entity name. Same pattern as Cin7 Core's /
     MuleSoft's / Salesforce's raw passthrough rows."""
+    title: str = ""
     id: str = ""
     token: str = ""
     data: dict = Field(default_factory=dict)
 
 
 class GenericRecordList(sdl.Entity):
+    id: str = ""
     title: str = ""
     items: list[GenericRecord] = Field(default_factory=list)
     total: int = 0
@@ -592,12 +597,15 @@ class GenericRecordList(sdl.Entity):
 
 
 class ActionResultEntity(sdl.Entity):
+    title: str = ""
     ok: bool = True
     id: str = ""
     message: str = ""
 
 
 class AuditFinding(sdl.Entity):
+    id: str = ""
+    title: str = ""
     category: str = ""
     severity: str = ""
     reference_id: str = ""
@@ -605,6 +613,7 @@ class AuditFinding(sdl.Entity):
 
 
 class AlloyAccountAudit(sdl.Entity):
+    id: str = ""
     title: str = ""
     findings: list[AuditFinding] = Field(default_factory=list)
     open_cases_count: int = 0
@@ -615,6 +624,8 @@ class AlloyAccountAudit(sdl.Entity):
 
 
 class PendingReviewQueueRow(sdl.Entity):
+    id: str = ""
+    title: str = ""
     review_token: str = ""
     entity_or_application_token: str = ""
     review_type: str = ""
@@ -623,6 +634,7 @@ class PendingReviewQueueRow(sdl.Entity):
 
 
 class PendingReviewQueue(sdl.Entity):
+    id: str = ""
     title: str = ""
     rows: list[PendingReviewQueueRow] = Field(default_factory=list)
     total: int = 0
