@@ -32,8 +32,7 @@ def _settings_button() -> ui.UINode:
     """The one required secondary entry point into the settings screen --
     always the last element at the bottom of the sidebar."""
     return ui.Button(
-        "App settings", variant="secondary", size="sm", full_width=True,
-        icon="settings", on_click=ui.Call("__panel__alloy_settings"),
+        "App settings", variant="secondary", size="sm", icon="settings", on_click=ui.Call("__panel__alloy_settings"),
     )
 
 
@@ -66,7 +65,7 @@ def _connect_section() -> ui.UINode:
         ui.Button("How do I set this up?", variant="ghost", size="sm",
                   icon="HelpCircle",
                   on_click=ui.Call("__panel__alloy_connect_help")),
-        ui.Button("Sign in with Alloy (OAuth 2.0)", variant="primary", size="sm", full_width=True, icon="login"),
+        ui.Button("Sign in with Alloy (OAuth 2.0)", variant="primary", size="sm", icon="login"),
         ui.Divider(),
         ui.Text("Or connect via API Token / Secret", variant="caption"),
         ui.Form(
@@ -121,8 +120,7 @@ async def alloy_connect_panel(ctx, **kwargs) -> object:
         ui.Text("Connected accounts", variant="subtitle"),
         _connections_section(connections),
         ui.Divider(),
-        ui.Button("View account audit", variant="primary", size="sm", full_width=True,
-                  icon="ShieldCheck", on_click=ui.Call("__panel__alloy_center")),
+        ui.Button("View account audit", variant="primary", size="sm", icon="ShieldCheck", on_click=ui.Call("__panel__alloy_center")),
         ui.Divider(),
         _connect_section(),
         ui.Divider(),
