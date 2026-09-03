@@ -66,6 +66,9 @@ def _connect_section() -> ui.UINode:
         ui.Button("How do I set this up?", variant="ghost", size="sm",
                   icon="HelpCircle",
                   on_click=ui.Call("__panel__alloy_connect_help")),
+        ui.Button("Sign in with Alloy (OAuth 2.0)", variant="primary", size="sm", full_width=True, icon="login"),
+        ui.Divider(),
+        ui.Text("Or connect via API Token / Secret", variant="caption"),
         ui.Form(
             action="connect_alloy",
             submit_label="Verify and connect",
